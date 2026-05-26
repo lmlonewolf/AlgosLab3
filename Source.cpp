@@ -164,10 +164,10 @@ bool BracketsTest::test() {
 
 
 void BracketsTest::print_full_test() {
-	test1.test();
-	std::cout << "First error: " << test1.first_error << std::endl;
-	std::cout << "Type error: " << test1.get_type_error() << std::endl;
-	std::cout << "Count pair: " << test1.count_pair << std::endl;
-	std::cout << "Max deep: " << test1.max_deep << std::endl;
-	std::cout << "Brackets balance: " << test1.get_brackets_balance() << std::endl;
+	test();
+	std::cout << "First error: " << first_error << std::endl;
+	std::cout << "Type error: " << get_type_error() << std::endl;
+	std::cout << "Count pair: " << count_pair << std::endl;
+	std::cout << "Max deep: " << max_deep << std::endl;
+	std::cout << "Brackets balance: " << get_brackets_balance() << std::endl;
 }
