@@ -121,7 +121,6 @@ bool BracketsTest::test() {
 				if (dict.find(el) != dict.end()) { // Ошибка начала стека
 					first_error = i;
 					type_error = 1;
-					std::cout << "Is correct test: " << false << std::endl;
 					return false;
 				}
 
@@ -139,7 +138,6 @@ bool BracketsTest::test() {
 					first_error = i;
 					type_error = 2;
 					max_deep = stack.get_max_deep();
-					std::cout << "Is correct test: " << false << std::endl;
 					return false;
 				}
 			}
@@ -154,17 +152,15 @@ bool BracketsTest::test() {
 	max_deep = stack.get_max_deep();
 	if (!stack.is_empty()) { // Проверка конца стека
 		first_error = static_cast<int> (len);
-		type_error = 3;
-		std::cout << "Is correct test: " << false << std::endl;
 		return false;
 	}
-	std::cout << "Is correct test: " << true << std::endl;
 	return true;
 }
 
 
 void BracketsTest::print_full_test() {
-	test();
+	bool correct = test();
+	std::cout << "Is correct test: " << correct << std::endl;
 	std::cout << "First error: " << first_error << std::endl;
 	std::cout << "Type error: " << get_type_error() << std::endl;
 	std::cout << "Count pair: " << count_pair << std::endl;
