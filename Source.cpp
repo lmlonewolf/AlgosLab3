@@ -57,6 +57,7 @@ void Stack::print() {
 BracketsTest::BracketsTest(std::string str) {
 	this->str = str;
 	len = str.length();
+	correct = test();
 }
 
 
@@ -159,7 +160,6 @@ bool BracketsTest::test() {
 
 
 void BracketsTest::print_full_test() {
-	bool correct = test();
 	std::cout << "Is correct test: " << correct << std::endl;
 	std::cout << "First error: " << first_error << std::endl;
 	std::cout << "Type error: " << get_type_error() << std::endl;

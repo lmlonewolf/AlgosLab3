@@ -39,7 +39,7 @@ public:
 };
 ```
 
-**Методы**
+**Конструктор и деструктор**
 ``` cpp
 Stack::Stack(size_t size) {
 	capacity = size;
@@ -50,8 +50,10 @@ Stack::Stack(size_t size) {
 Stack::~Stack() {
 	delete[] arr;
 }
+```
 
-
+**Основные методы**
+``` cpp
 bool Stack::is_empty() const {
 	return top_index == -1;
 }
@@ -81,7 +83,10 @@ char Stack::pop() {
 		throw std::out_of_range("Stack is empty");
 	return arr[top_index--];
 }
+```
 
+**Вспомогательные методы**
+``` cpp
 int Stack::get_max_deep() const  {
 	return max_deep;
 }
@@ -99,6 +104,13 @@ void Stack::print() {
 class BracketsTest{
 	std::string str = "";
 	size_t len = 0;
+
+	bool correct = false;
+	int first_error = -1;
+	int count_pair = 0;
+	int max_deep = 0;
+	int type_error = -1;
+
 	const std::string alph = "<>{}[]()";
 	const std::map<char, char> dict = {
 		{'>', '<'},
@@ -107,75 +119,29 @@ class BracketsTest{
 		{')', '('}
 	};
 
-public:
-	int first_error = -1;
-	int count_pair = 0;
-	int max_deep = 0;
-	int type_error = -1;
+	bool in_alph(char ch) const;
+	bool test(void);
 
+public:
 	BracketsTest(std::string str);
 	
-	std::string get_type_error(void) const; // Получение строки типа ошибки
-	std::string get_brackets_balance(void) const; // Получение строки оа балански открывающих и закрывающих скобок
-	bool in_alph(char ch) const; // Проверка наличия в алфавите скобок
-	bool test(void); // Функция теста
-	void print_full_test(void);	 // Вывод полной статисики
+	std::string get_type_error(void) const;
+	std::string get_brackets_balance(void) const;
+	void print_full_test(void);	
 };
 ```
 
-**Методы**
+**Конструктор**
 ``` cpp
 BracketsTest::BracketsTest(std::string str) {
 	this->str = str;
 	len = str.length();
+	correct = test();
 }
+```
 
-
-std::string BracketsTest::get_type_error() const  {
-	switch (type_error) {
-		case -1:
-			return "All correct";
-		case 1:
-			return "Extra closing brackets";
-		case 2:
-			return "Incorrect brackets order";
-		case 3:
-			return "missing closing brackets";
-	}
-}
-
-std::string BracketsTest::get_brackets_balance() const {
-	int counter = 0;
-
-	if (str == "")
-		throw std::out_of_range("String is empty");
-
-	Stack stack(len);
-	for (int i = 0; i < len; i++) {
-		char el = str[i];
-		if (in_alph(el)) {
-			if (dict.find(el) != dict.end())
-				counter--;
-			else
-				counter++;
-		}
-	}
-	
-	if (counter == 0)
-		return "Equal opening and closing brackets";
-	if (counter > 0)
-		return "More opening brackets";
-	return "More closing brackets";
-}
-
-bool BracketsTest::in_alph(char ch) const {
-	for (int i = 0; i < 8; i++) {
-		if (alph[i] == ch)
-			return true;
-	}
-	return false;
-}
-
+**Основной метод (Тест)** 
+``` cpp
 bool BracketsTest::test() {
 	if (str == "")
 		throw std::out_of_range("String is empty");
@@ -227,10 +193,56 @@ bool BracketsTest::test() {
 	}
 	return true;
 }
+```
 
+**Вспомогательные методы**
+``` cpp
+std::string BracketsTest::get_type_error() const  {
+	switch (type_error) {
+		case -1:
+			return "All correct";
+		case 1:
+			return "Extra closing brackets";
+		case 2:
+			return "Incorrect brackets order";
+		case 3:
+			return "missing closing brackets";
+	}
+}
+
+std::string BracketsTest::get_brackets_balance() const {
+	int counter = 0;
+
+	if (str == "")
+		throw std::out_of_range("String is empty");
+
+	Stack stack(len);
+	for (int i = 0; i < len; i++) {
+		char el = str[i];
+		if (in_alph(el)) {
+			if (dict.find(el) != dict.end())
+				counter--;
+			else
+				counter++;
+		}
+	}
+	
+	if (counter == 0)
+		return "Equal opening and closing brackets";
+	if (counter > 0)
+		return "More opening brackets";
+	return "More closing brackets";
+}
+
+bool BracketsTest::in_alph(char ch) const {
+	for (int i = 0; i < 8; i++) {
+		if (alph[i] == ch)
+			return true;
+	}
+	return false;
+}
 
 void BracketsTest::print_full_test() {
-	bool correct = test();
 	std::cout << "Is correct test: " << correct << std::endl;
 	std::cout << "First error: " << first_error << std::endl;
 	std::cout << "Type error: " << get_type_error() << std::endl;

@@ -28,6 +28,13 @@ public:
 class BracketsTest{
 	std::string str = "";
 	size_t len = 0;
+
+	bool correct = false;
+	int first_error = -1;
+	int count_pair = 0;
+	int max_deep = 0;
+	int type_error = -1;
+
 	const std::string alph = "<>{}[]()";
 	const std::map<char, char> dict = {
 		{'>', '<'},
@@ -36,17 +43,13 @@ class BracketsTest{
 		{')', '('}
 	};
 
-public:
-	int first_error = -1;
-	int count_pair = 0;
-	int max_deep = 0;
-	int type_error = -1;
+	bool in_alph(char ch) const;
+	bool test(void);
 
+public:
 	BracketsTest(std::string str);
 	
 	std::string get_type_error(void) const;
 	std::string get_brackets_balance(void) const;
-	bool in_alph(char ch) const;
-	bool test(void);
 	void print_full_test(void);	
 };
