@@ -49,5 +49,6 @@ public:
 	std::string get_brackets_balance(void) const;
 	bool in_alph(char ch) const;
 	bool test(void);
+	void print_full_test(void);
 	
 };
