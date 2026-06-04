@@ -147,9 +147,10 @@ bool BracketsTest::test() {
 			else
 				flag = 0;
 		}
-		std::cout << std::endl << i + 1 << ' ';
-		stack.print();
 	}
+	std::cout << std::endl;
+	stack.print();
+
 	max_deep = stack.get_max_deep();
 	if (!stack.is_empty()) { // Проверка конца стека
 		first_error = static_cast<int> (len);
