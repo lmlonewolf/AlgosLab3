@@ -17,7 +17,7 @@
 8. Показывать содержимое стека после каждого шага
 
 ## Реализация
-### Стек
+### `Стек`
 **Структура**
 ``` cpp
 class Stack {
@@ -98,7 +98,7 @@ void Stack::print() {
 }
 ```
 
-### BracketsTest
+### `BracketsTest`
 **Структура**
 ``` cpp
 class BracketsTest{
@@ -197,6 +197,7 @@ bool BracketsTest::test() {
 
 **Вспомогательные методы**
 ``` cpp
+// Тип ошибки
 std::string BracketsTest::get_type_error() const  {
 	switch (type_error) {
 		case -1:
@@ -210,6 +211,7 @@ std::string BracketsTest::get_type_error() const  {
 	}
 }
 
+// Баланс открывающих и закрывающих скобок
 std::string BracketsTest::get_brackets_balance() const {
 	int counter = 0;
 
@@ -234,6 +236,7 @@ std::string BracketsTest::get_brackets_balance() const {
 	return "More closing brackets";
 }
 
+// Проверка наличия в алфавите скобок
 bool BracketsTest::in_alph(char ch) const {
 	for (int i = 0; i < 8; i++) {
 		if (alph[i] == ch)
@@ -242,6 +245,7 @@ bool BracketsTest::in_alph(char ch) const {
 	return false;
 }
 
+// Вывод паолного отчёта
 void BracketsTest::print_full_test() {
 	std::cout << "Is correct test: " << correct << std::endl;
 	std::cout << "First error: " << first_error << std::endl;
